@@ -1,0 +1,9 @@
+# Ignorar datos pesados
+data/
+*.csv
+*.RData
+
+# Ignorar archivos de sistema
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
