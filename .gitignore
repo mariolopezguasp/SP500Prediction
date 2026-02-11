@@ -7,3 +7,5 @@ data/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+
+data/processed/sp500_master.csv
