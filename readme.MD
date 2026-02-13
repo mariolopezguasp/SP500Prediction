@@ -5,10 +5,10 @@ Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje 
 ## 1. Definición del Problema
 El problema seleccionado es de **Aprendizaje Supervisado (Regresión Multivariante)**. Buscamos predecir el vector de retornos financieros en el instante $t+1$ a partir de la información histórica disponible en el instante $t$.
 
-La predicción de mercados financieros es un reto debido a la baja relación señal-ruido. Este proyecto utiliza una selección de 12 activos líderes de diferentes sectores económicos, filtrados mediante técnicas de **Hierarchical Risk Parity (HRP)** para maximizar la diversificación.
+La predicción de mercados financieros es un reto debido a la baja relación señal-ruido. Este proyecto utiliza una selección de 12 activos líderes de diferentes sectores económicos y se busca a través de añadir otras variables que puedan influir al precio de las acciones predecir el precio de las mismas.
 
 ## 2. Estructura del Proyecto
-* `datos/`: Contiene el dataset histórico (`dataset_ia_log_returns_10y.csv`).
+* `datos/`: Contiene el dataset histórico de 10 años del retorno diario frente al dia anterior de 12 empresas que cotizan en el SP500.(`dataset_ia_log_returns_10y.csv`).
 * `notebooks/`: Notebooks de Google Colab con el EDA y el desarrollo de modelos.
 * `src/`: Código fuente auxiliar y scripts de preprocesamiento.
 * `requirements.txt`: Librerías necesarias (pandas, numpy, tensorflow, etc.).
@@ -27,23 +27,31 @@ Se han seleccionado las siguientes métricas para validar el modelo:
 2.  **Mean Absolute Error (MAE):** Medida de error promedio en magnitud.
 3.  **Sharpe Ratio:** Evaluación de la calidad de la predicción en un contexto financiero.
 
-## 5. Análisis del Estado del Arte
+## 5. Análisis del Estado del Arte y Baselines de Referencia
 
+Para validar la eficacia de los modelos de Deep Learning, estableceremos una comparativa frente a estrategias convencionales de inversión y métricas de predicción base. El objetivo es superar el desempeño del mercado y la persistencia de datos.
 
-| Modelo | Técnica | Ventaja | Métrica Ref (MSE) |
-| :--- | :--- | :--- | :--- |
-| **ARIMA** | Estadística Clásica | Baseline robusto para series lineales | 0.00125 |
-| **LSTM** | RNN (Deep Learning) | Captura dependencias temporales largas | 0.00042 |
-| **GRU** | RNN (Deep Learning) | Más eficiente que LSTM (menos parámetros) | 0.00045 |
-| **CNN-LSTM** | Híbrido | Extracción de patrones locales y temporales | 0.00035 |
-| **Transformers** | Attention Mechanisms | Captura de relaciones globales de largo plazo | 0.00031 |
+### Baselines de Rendimiento (Financieros)
+El modelo final se evaluará bajo la capacidad de batir la rentabilidad del mercado ponderado:
 
-## 6. Ejecución en Google Colab
-El notebook en `notebooks/DLFase1.ipynb` incluye:
-1.  Carga de datos y **EDA**.
-2.  Estadísticas descriptivas y matrices de correlación.
-3.  Generación de variables `X` e `y` listas para el entrenamiento.
+| Estrategia | Referencia Histórica | Objetivo del Proyecto |
+| :--- | :--- | :--- |
+| **Buy & Hold S&P 500** | ~8% - 10% Anual | Superar el retorno ajustado al riesgo (Sharpe) |
+| **Naive Forecast** | $y_{t+1} = y_t$ | Lograr una correlación de predicción > 0.5 |
+| **Moving Average (MA)** | Estrategia de tendencia | Superar la capacidad de respuesta ante giros de mercado |
+
+### Baselines de Predicción (Métricas de Error)
+En series temporales financieras, el "ruido" es muy alto. Se consideran resultados competitivos aquellos que logran reducir el error base del promedio:
+
+| Modelo | Enfoque | Métrica Objetivo (MSE) |
+| :--- | :--- | :--- |
+| **Media Histórica** | Predicción constante del promedio | 0.00180 (Baseline a batir) |
+| **Regresión Lineal** | Modelo de base lineal | 0.00110 |
+| **LSTM Multivariante** | Nuestro enfoque de Deep Learning | **< 0.00060** (Meta esperada) |
+
+*Nota: Batir la rentabilidad media anual del S&P 500 (aprox. 10%) con una selección de solo 12 activos requiere que el modelo optimice no solo la dirección (precio), sino también la ponderación del riesgo mediante la predicción de la volatilidad.*
+
 
 ---
-**Autor:** Mario López Guasp
+**Autor:** Mario López Guasp y Andrés Carvajal Chicaiza
 **Fecha:** 13 de febrero de 2026
