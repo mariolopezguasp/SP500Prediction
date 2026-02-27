@@ -2,6 +2,15 @@
 
 Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje Profundo** (Grado en Ciencia de Datos, Universitat de València). El objetivo del proyecto es predecir los retornos logarítmicos de una selección diversificada de activos del S&P 500 utilizando arquitecturas de redes neuronales.
 
+### Tabla de Resultados (temporales solo modelos simples)
+Métricas de evaluación de los modelos simples:
+
+| Modelo | MSE | MAE | RMSE | Sharpe
+| :--- | :--- | :--- | :--- | :--- |
+| Lineal | 0.000318 | 0.012072 | 0.017820 | 51.95% |
+| XGBoost | 0.000332 | 0.012329 | 0.018227 | 51.02% |
+| Neuronal | 0.000325 | 0.012301 | 0.018037 | 51.39% |
+
 ## 1. Definición del Problema
 El problema seleccionado es de **Aprendizaje Supervisado (Regresión Multivariante)**. Buscamos predecir el vector de retornos financieros en el instante $t+1$ a partir de la información histórica disponible en el instante $t$.
 
