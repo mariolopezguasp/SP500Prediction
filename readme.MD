@@ -5,7 +5,7 @@ Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje 
 ### Tabla de Resultados (temporales solo modelos simples)
 Métricas de evaluación de los modelos simples:
 
-| Modelo | MSE | MAE | RMSE | Sharpe
+| Modelo | MSE | MAE | RMSE | Acierto Direccional
 | :--- | :--- | :--- | :--- | :--- |
 | Lineal | 0.000318 | 0.012072 | 0.017820 | 51.95% |
 | XGBoost | 0.000332 | 0.012329 | 0.018227 | 51.02% |
