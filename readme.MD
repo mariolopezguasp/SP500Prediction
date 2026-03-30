@@ -2,7 +2,7 @@
 
 Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje Profundo** (Grado en Ciencia de Datos, Universitat de València). El objetivo del proyecto es predecir los retornos logarítmicos de una selección diversificada de activos del S&P 500 utilizando arquitecturas de redes neuronales.
 
-### Tabla de Resultados (temporales solo modelos simples)
+### Tabla de Resultados
 Métricas de evaluación de los modelos simples:
 
 | Modelo | Parámetros | MSE | MAE | RMSE | Acierto Direccional |
