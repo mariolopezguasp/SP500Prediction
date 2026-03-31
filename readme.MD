@@ -162,7 +162,8 @@ El análisis de las estrategias (**Only-Long** y **Long-Short**) reveló una cap
 Aunque nuestro mejor modelo no haya podido superar de media los resultados del Buy and Hold, hemos obtenido unos resultados que han estado cerca de igualarlo
 
 ### 8.3. Impacto Estratégico de los Datos Macroeconómicos
-[cite_start]La integración de variables exógenas representó la mejora más significativa en la estabilidad de las predicciones[cite: 63]. Al alimentar la red con el **Tipo de Interés de la FED (DFF)**, el modelo adquirió una "visión de contexto" sobre la liquidez global de la que carecen los modelos técnicos puros. Esta combinación de micro-datos (retornos) y macro-datos (tipos de interés) fue el factor diferencial para reducir el error durante periodos de alta incertidumbre económica.
+La mejora más significativa en la estabilidad de las predicciones provino de la integración de variables exógenas. Al alimentar la red con el Tipo de Interés de la FED (DFF), el modelo adquirió una "visión de contexto" sobre la liquidez global de la que carecen los modelos técnicos puros. Esta combinación de micro-datos (retornos) y macro-datos (tipos de interés) fue el factor diferencial para reducir el error durante periodos de alta incertidumbre económica.
+
 
 ### 8.4. Integración de un Pipeline de Datos Integral
 Los resultados finales son el producto de un flujo de trabajo de ingeniería cohesivo:
@@ -174,4 +175,4 @@ Este pipeline representa una base sólida y escalable para futuras implementacio
 
 ---
 **Autores:** Mario López Guasp y Andrés Carvajal Chicaiza  
-**Fecha:** 13 de febrero de 2026
+**Fecha:** 30 de Marzo de 2026
