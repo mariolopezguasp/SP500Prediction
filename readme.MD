@@ -154,25 +154,24 @@ El éxito del modelo no fue uniforme, lo que valida la necesidad de una gestión
 
 ## 8. Conclusiones
 
-### 8.1. El valor de la arquitectura simplificada
-Una de las lecciones principales fue que un mopdelo más complejo no siempre garantiza mejores resultados. Los modelos con demasiados parámetros pueden tender a sobreajustarse. Nuestra **LSTM Simple** demostró ser la más robusta, logrando un **Hit Ratio del 53.18%**, lo que confirma que en ocasiones, un diseño ligero es más eficaz.
+### 8.1. Superioridad de la Arquitectura Simplificada
+[cite_start]Una de las lecciones fundamentales de este proyecto es que una mayor complejidad paramétrica no garantiza un rendimiento superior en mercados financieros[cite: 62]. [cite_start]Los modelos con exceso de parámetros, como la **LSTM Compleja**, tendieron al sobreajuste (*overfitting*) al memorizar el ruido estocástico del entrenamiento[cite: 34, 62]. [cite_start]Nuestra **LSTM Simple** demostró ser la más robusta, logrando un **Hit Ratio del 53.18%**, lo que confirma que en entornos de baja señal, un diseño ligero es más eficaz para la generalización[cite: 26, 28, 62].
 
-### 8.2. Rendimiento y Generación de Alpha
-El análisis de las estrategias de inversión (*Only-Long* y *Long-Short*) reveló que el modelo tiene una capacidad real para identificar ineficiencias:
-* **Éxito en Diversificación:** El modelo logró batir la rentabilidad pasiva del mercado (*Buy & Hold*) en el **50.0%** de los activos analizados.
-* **Casos Destacados:** En empresas como **AMZN** o **PG**, las decisiones de la IA superaron con creces el rendimiento tradicional, demostrando que el modelo detecta cambios de tendencia que el inversor pasivo ignora.
-* **Sesgo Conservador:** En activos con crecimientos explosivos y constantes (como NVDA), el modelo tendió a ser prudente, lo que sugiere nuestro modelo suele infraestimar movimientos parabólicos en favor de la estabilidad.
+### 8.2. Rendimiento Operativo y Estrategias de Inversión
+[cite_start]El análisis de las estrategias (**Only-Long** y **Long-Short**) reveló una capacidad real del modelo para identificar ineficiencias estructurales en el mercado[cite: 47, 64]. 
+* **Comparativa con Benchmark**: Aunque el mejor modelo no logró superar de media los resultados del *Buy & Hold* (31.27% vs 29.33%), los resultados obtenidos estuvieron cerca de igualarlo, demostrando una alta competitividad.
+* [cite_start]**Generación de Alpha**: Se batió al mercado en el **50% de los activos**, con casos de éxito sobresalientes como **AMZN** (+27.46% de Alpha) y **PG** (+24.23% de Alpha)[cite: 49, 50, 64].
 
-### 8.3. El impacto estratégico de los datos macroeconómicos
-Una de las mejoras más significativas en el rendimiento del modelo provino de la integración de **variables macroeconómicas**. Al alimentar la red no solo con precios históricos, sino también con el **Tipo de Interés de la FED**, el modelo adquirió una "visión de contexto" de la que carecen los modelos técnicos simples. Esta capa de información exógena permitió que la IA ajustara sus expectativas según el entorno de liquidez global, logrando una estabilidad en las predicciones que los modelos basados únicamente en el precio no pudieron alcanzar. En definitiva, la combinación de micro-datos (retornos de activos) y macro-datos (tipos de interés) fue el factor diferencial para reducir el error en periodos de incertidumbre.
+### 8.3. Impacto Estratégico de los Datos Macroeconómicos
+[cite_start]La integración de variables exógenas representó la mejora más significativa en la estabilidad de las predicciones[cite: 63]. Al alimentar la red con el **Tipo de Interés de la FED (DFF)**, el modelo adquirió una "visión de contexto" sobre la liquidez global de la que carecen los modelos técnicos puros. Esta combinación de micro-datos (retornos) y macro-datos (tipos de interés) fue el factor diferencial para reducir el error durante periodos de alta incertidumbre económica.
 
-### 8.4. Integración de un Pipeline de Datos Completo
-Más allá de la arquitectura de la red, los resultados del proyecto vienen por la construcción de un flujo de trabajo integral donde se lleva a cabo:
-1.  **Extracción de datos:** Implementación de técnicas de recolección de datos automatizada de **Wikipedia** (para la selección de activos) y **Yahoo Finance**, asegurando un histórico sólido de los últimos 10 años.
-2.  **Contexto Macroeconómico:** Integración de variables externas (tipos de interés de la FED) para dotar al modelo de una visión global del entorno económico.
-3.  **Transformación de Señal:** Uso de retornos logarítmicos para garantizar la estabilidad estadística de los datos de entrada.
-4.  **Lógica de Decisión:** Traducción de predicciones numéricas en una estrategia de portafolio capaz de competir con los estándares del sector.
+### 8.4. Integración de un Pipeline de Datos Integral
+[cite_start]Los resultados finales son el producto de un flujo de trabajo de ingeniería cohesivo[cite: 61]:
+* **Extracción de datos**: Implementación de *scraping* en **Wikipedia** y **Yahoo Finance** para consolidar una base histórica sólida de 10 años.
+* **Transformación de Señal**: Uso de retornos logarítmicos y escalado estándar para garantizar la estacionariedad y estabilidad estadística de las entradas.
+* **Lógica de Decisión**: Traducción exitosa de predicciones numéricas tensoriales en estrategias de portafolio capaces de competir con los estándares del sector financiero.
 
+[cite_start]Este pipeline representa una base sólida y escalable para futuras implementaciones con otras fuentes exógenas que puedan aportar información adicional a la red para optimizar los resultados predictivos[cite: 65].
 ---
 **Autores:** Mario López Guasp y Andrés Carvajal Chicaiza  
 **Fecha:** 13 de febrero de 2026
