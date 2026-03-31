@@ -30,8 +30,20 @@ El problema seleccionado es de **Aprendizaje Supervisado (Regresión Multivarian
 La predicción de mercados financieros es un reto debido a la baja relación señal-ruido. Este proyecto utiliza una selección de 12 activos líderes de diferentes sectores económicos y se busca a través de añadir otras variables que puedan influir al precio de las acciones predecir el precio de las mismas.
 
 ## 2. Estructura del Proyecto
-* `datos/`: Contiene el dataset histórico de 10 años del retorno diario frente al dia anterior de 12 empresas que cotizan en el SP500.(`dataset_ia_log_returns_10y.csv`) y otro dataset con los datos de esos 10 años pero con el valor de cierre diario ('dataset_ia_precios_cierre_10y.csv').
-* `notebooks/`: Notebooks de Google Colab con el desarrollo de modelos y un Rmarkdown con el EDA.
+
+
+* ** Datasets:** * `dataset_ia_log_returns_10y.csv`: Datos históricos de 10 años con los retornos logarítmicos diarios de los 12 activos (variable principal de entrenamiento).
+    * `dataset_ia_precios_cierre_10y.csv`: Precios de cierre diarios utilizados para las simulaciones de inversión y cálculo de rentabilidad real.
+
+* **Notebooks de Modelado:**
+    * `1ModeloLineal.ipynb`: Baseline de regresión lineal.
+    * `2ModeloXGBoost.ipynb`: Implementación basada en Gradient Boosting.
+    * `3ModeloMLP.ipynb`: Red Neuronal Perceptrón Multicapa.
+    * `4ModeloLSTMSimple.ipynb`: **Modelo seleccionado** con arquitectura híbrida (LSTM + Datos Macro).
+    * `5ModeloLSTMComplejo.ipynb`: Experimentación con arquitectura profunda de alta parametrización.
+
+* **Extracción y procesado de datos en R:**
+    * `procesamientodatos.Rmd`: Script en R para la extraccioón de datos.
 
 
 
