@@ -5,7 +5,6 @@ Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje 
 ### Tablas de Resultados
 
 
-Tabla del % de acierto direccional
 | Modelo | Parametros | Hit Ratio Train | Hit Ratio Val | Hit Ratio Test |
 | :--- | :--- | :--- | :--- | :--- |
 | Lineal | 145 | 53.19% | 49.96% | 51.95% |
