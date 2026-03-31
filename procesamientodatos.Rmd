@@ -1,0 +1,204 @@
+---
+title: "ProcesamientoDatos"
+output: html_document
+date: "2026-03-31"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Librerías
+
+```{r librerias}
+# --- CARGA DE LIBRERÍAS ---
+library(quantmod)
+library(corrplot)       # Visualización de matrices
+library(cluster)        # Algoritmos base
+library(factoextra)     # Visualización y métricas
+library(dynamicTreeCut) # Algoritmo de corte adaptativo
+library(fpc)            # Validación estadística
+library(rvest)          # Web scraping para etiquetas GICS
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(viridis)        # Paletas de color
+library(gridExtra)      # Paneles de gráficos
+library(reshape2)
+library(tidyverse)
+library(dplyr)
+library(magrittr)
+
+```
+
+# 3. Descarga Activos SP500
+
+
+
+```{r torneo_algoritmos}
+# Obtener los identificadores del SP500 -----------------------------------
+
+sp500_wiki <- read_html(
+  "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
+
+symbols_table <- sp500_wiki %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/table[1]') %>%
+  html_table()
+symbols_table <- symbols_table[[1]]
+symbols <- as.character(symbols_table$Symbol)
+
+
+# Definir el periodo de los datos (por defecto el último año) -------------
+
+end <- Sys.Date()
+start <- end - 10 * 365
+
+
+# Se inicializa la serie temporal xts donde se almacenarán los datos -------------------
+
+
+sp500 <- NULL
+symbols <- symbols[1:5]
+for (s in symbols){
+  print(s)
+  s_data <- tryCatch(getSymbols(s, src="yahoo", from = as.Date(start), 
+                                to = as.Date(end),
+                                env = NULL), error = function(e) NULL)
+  if(!is.null(s_data)){
+    s_data <- Cl(s_data) # Selecciona el Close price
+    names(s_data) <- s
+    s_data %<>% as.xts
+  }
+  if (length(unique(s_data)) > 1){
+    if (is.null(sp500)) {
+      sp500 <- as.xts(s_data)
+    } else {
+      sp500 %<>% merge(s_data, join = "outer")
+    }
+  } else { 
+    cat("Sorry, but not this one!\n")
+  }
+}
+
+
+# Se transforma a data.frame ----------------------------------------------
+
+
+sp500df <- as.data.frame(sp500)
+
+
+# Nos quedamos con los activos que tengan todos los datos -----------------
+
+
+symbols_with_NA <- which(sp500df %>% 
+                           apply(MARGIN = 2, function(x) any(is.na(x))))
+
+sp500df <- sp500df[,- symbols_with_NA] 
+
+save(sp500df, file = "sp500df.RData")
+
+```
+
+```{r}
+load("datos_sp500_completo_ohlcv.RData") 
+retornos <- datos_tfg$retornos
+df_precios <- datos_tfg$precios 
+
+# 1. Limpieza de Historia: Eliminar activos con demasiados NAs
+retornos <- retornos[, colSums(is.na(retornos)) < nrow(retornos)]
+
+# 2. Limpieza de Varianza: Eliminar activos estáticos (precio constante)
+retornos <- retornos[, apply(retornos, 2, var, na.rm=TRUE) != 0]
+
+# 3. Imputación: NAs residuales a 0 (Neutralidad)
+retornos[is.na(retornos)] <- 0
+
+cat("Datos procesados. Universo final:", ncol(retornos), "activos |", nrow(retornos), "observaciones.\n")
+```
+
+
+```{r}
+library(tidyverse)
+library(zoo)
+
+# --- 1. RECONSTRUCCIÓN DE DATOS ENRIQUECIDOS ---
+# Usamos directamente los objetos que ya tienes cargados: 'retornos' y 'df_precios'
+
+
+# Los retornos que tienes suelen ser aritméticos. 
+# Para la LSTM, convertimos los precios a Log-Retornos para asegurar estabilidad:
+ret_log_master <- log(df_precios / lag(df_precios))
+
+# Calculamos Volatilidad Rolling (Ventana de 20 días)
+# Esto le da a la IA el "contexto de riesgo"
+vol_master <- rollapply(ret_log_master, width = 20, FUN = function(x) sd(x, na.rm = TRUE), 
+                        fill = NA, align = "right")
+
+# Creamos el objeto maestro para que no de más errores de "no encontrado"
+datos_enriquecidos <- list(
+  retornos_log = na.omit(ret_log_master),
+  volatilidad_pk = na.omit(vol_master)
+)
+# --- 2. EXTRACCIÓN DE LOS 12 ELEGIDOS ---
+
+# Tu lista de campeones seleccionada previamente
+elegidos_tickers <- c("JPM", "ETN", "NVDA", "NEE", "V", "AMZN", 
+                      "MSFT", "PGR", "XOM", "WELL", "PG", "WMT")
+
+# Sincronizamos activos disponibles
+activos_finales <- intersect(elegidos_tickers, colnames(datos_enriquecidos$retornos_log))
+
+# Creamos las matrices finales
+matriz_ia_ret <- datos_enriquecidos$retornos_log[, activos_finales]
+matriz_ia_vol <- datos_enriquecidos$volatilidad_pk[, activos_finales]
+
+# Sincronizamos fechas para que coincidan perfectamente
+fechas_comunes <- intersect(rownames(matriz_ia_ret), rownames(matriz_ia_vol))
+matriz_ia_ret <- matriz_ia_ret[fechas_comunes, ]
+matriz_ia_vol <- matriz_ia_vol[fechas_comunes, ]
+
+# --- 3. GUARDADO Y VERIFICACIÓN ---
+save(matriz_ia_ret, matriz_ia_vol, file = "DATOS_FINALES_IA_LOG.RData")
+
+cat("\n--- PROCESO COMPLETADO SIN ERRORES ---\n")
+cat("Universo IA:", ncol(matriz_ia_ret), "activos seleccionados.\n")
+cat("Días de entrenamiento:", nrow(matriz_ia_ret), "\n")
+print(colnames(matriz_ia_ret))
+```
+
+```{r}
+library(tidyverse)
+
+# --- 1. SELECCIÓN Y CÁLCULO ---
+elegidos_tickers <- c("JPM", "ETN", "NVDA", "NEE", "V", "AMZN", 
+                      "MSFT", "PGR", "XOM", "WELL", "PG", "WMT")
+
+# Extraemos precios de cierre para los 12 elegidos
+precios_12 <- df_precios[, elegidos_tickers]
+
+# Calculamos Retornos Logarítmicos
+# Nota: Perdemos la primera fila por el cálculo del lag
+ret_log_12 <- log(precios_12 / lag(precios_12))
+ret_log_12 <- na.omit(ret_log_12)
+
+# --- 2. VERIFICACIÓN DE TEMPORALIDAD ---
+n_obs <- nrow(ret_log_12)
+fecha_inicio <- head(rownames(ret_log_12), 1)
+fecha_fin <- tail(rownames(ret_log_12), 1)
+
+cat("--- VERIFICACIÓN DE DATOS (10 AÑOS) ---\n")
+cat("Activos seleccionados:", length(elegidos_tickers), "\n")
+cat("Total observaciones:", n_obs, " (Aprox. 252 días/año * 10 años)\n")
+cat("Rango temporal:", fecha_inicio, " hasta ", fecha_fin, "\n\n")
+
+# --- 3. VISUALIZACIÓN (HEAD) ---
+print("Vista previa de los Retornos Logarítmicos:")
+print(head(ret_log_12))
+
+# --- 4. EXPORTACIÓN A CSV ---
+write.csv(ret_log_12, "datasetretornosfiltrado.csv", row.names = TRUE)
+write.csv(precios_12, "dataset_ia_precios_cierre_10y.csv", row.names = TRUE)
+
+cat("\n¡ÉXITO! Archivos 'dataset_ia_log_returns_10y.csv' generado.")
+```
+
