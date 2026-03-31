@@ -3,14 +3,16 @@
 Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje Profundo** (Grado en Ciencia de Datos, Universitat de València). El objetivo del proyecto es predecir los retornos logarítmicos de una selección diversificada de activos del S&P 500 utilizando arquitecturas de redes neuronales.
 
 ### Tabla de Resultados
-Métricas de evaluación de los modelos:
 
-| Modelo | Parámetros | MSE | MAE | RMSE | Acierto Direccional |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Lineal | - | 0.000318 | 0.012072 | 0.017820 | 51.95% |
-| XGBoost | 600 árboles | 0.000332 | 0.012329 | 0.018227 | 51.02% |
-| Neuronal | 156 | 0.000325 | 0.012301 | 0.018037 | 51.39% |
-| Complejo (Híbrido) | 341,524 | 0.000308 | 0.011930 | 0.017556 | 53.80% |
+
+Tabla del % de acierto direccional
+| Modelo | Parametros | Hit Ratio Train | Hit Ratio Val | Hit Ratio Test |
+| :--- | :--- | :--- | :--- | :--- |
+| Lineal | 145 | 53.19% | 49.96% | 51.95% |
+| XGBoost | 600 | 60.68% | 51.55% | 51.02% |
+| MLP | 3308 | 52.92% | 54.14% | 52.14% |
+| LSTM Simple | 13,836 | 54.69% | 53.38% | 52.72% |
+| LSTM Complejo | 138,214 | 53.10% | 52.15% | 52.24% |
 
 ## 1. Definición del Problema
 El problema seleccionado es de **Aprendizaje Supervisado (Regresión Multivariante)**. Buscamos predecir el vector de retornos financieros en el instante $t+1$ a partir de la información histórica disponible en el instante $t$.
