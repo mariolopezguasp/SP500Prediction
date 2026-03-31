@@ -63,27 +63,18 @@ Se han seleccionado las siguientes métricas para validar el modelo:
 
 ## 5. Análisis del Estado del Arte y Baselines de Referencia
 
-Para validar la eficacia de los modelos de Deep Learning, estableceremos una comparativa frente a estrategias convencionales de inversión y métricas de predicción base. El objetivo es superar el desempeño del mercado y la persistencia de datos.
+Para validar la eficacia de nuestros modelos de Deep Learning, comparamos los resultados frente a estrategias convencionales de inversión y métricas de predicción base:
 
-### Baselines de Rendimiento (Financieros)
-El modelo final se evaluará bajo la capacidad de batir la rentabilidad del mercado ponderado:
+### 📈 Baselines de Rendimiento (Objetivos Financieros)
+* **Buy & Hold S&P 500:** Referencia histórica del ~8-10% anual. Nuestro objetivo es superar este retorno ajustado al riesgo (Sharpe Ratio).
+* **Naive Forecast ($y_{t+1} = y_t$):** Superar la persistencia de datos logrando una correlación de predicción superior a 0.5.
+* **Moving Average (MA):** Batir la capacidad de respuesta de las estrategias de tendencia tradicionales ante giros bruscos del mercado.
 
-| Estrategia | Referencia Histórica | Objetivo del Proyecto |
-| :--- | :--- | :--- |
-| **Buy & Hold S&P 500** | ~8% - 10% Anual | Superar el retorno ajustado al riesgo (Sharpe) |
-| **Naive Forecast** | $y_{t+1} = y_t$ | Lograr una correlación de predicción > 0.5 |
-| **Moving Average (MA)** | Estrategia de tendencia | Superar la capacidad de respuesta ante giros de mercado |
-
-### Baselines de Predicción (Métricas de Error)
-En series temporales financieras, el "ruido" es muy alto. Se consideran resultados competitivos aquellos que logran reducir el error base del promedio:
-
-| Modelo | Enfoque | Métrica Objetivo (MSE) |
-| :--- | :--- | :--- |
-| **Media Histórica** | Predicción constante del promedio | 0.00180 (Baseline a batir) |
-| **Regresión Lineal** | Modelo de base lineal | 0.00110 |
-| **LSTM Multivariante** | Nuestro enfoque de Deep Learning | **< 0.00060** (Meta esperada) |
-
----
+### 📉 Baselines de Predicción (Métricas de Error)
+En un entorno con alto "ruido", consideramos resultados competitivos aquellos que reduzcan el error base de los modelos estándar:
+* **Media Histórica:** Baseline a batir con un MSE de 0.00180.
+* **Regresión Lineal:** Referencia de modelo lineal con un MSE de 0.00110.
+* **LSTM Multivariante:** Nuestra meta de Deep Learning fijada en un **MSE < 0.00060**.
 
 ## 6. Selección del Modelo y Análisis de la Arquitectura
 
