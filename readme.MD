@@ -161,25 +161,27 @@ El éxito del modelo no fue uniforme, lo que valida la necesidad de una gestión
 * **Éxitos Claros:** En activos como **ETN, NEE, V, AMZN, PGR y PG**, las predicciones del modelo superaron sistemáticamente al Buy & Hold.
 * **Desafíos:** En activos con tendencias alcistas parabólicas (como **WMT** o **NVDA**), el modelo tendió a ser conservador, lo que resultó en un *underperformance* relativo frente a simplemente mantener el activo.
 
-## 8. Conclusiones y Discusión Final
+## 8. Conclusiones
 
-El desarrollo de este proyecto ha permitido explorar la intersección entre las arquitecturas de **Deep Learning** y la microestructura de los mercados financieros. Tras un proceso iterativo de diseño, entrenamiento y validación, se extraen las siguientes conclusiones fundamentales:
+### 8.1. El valor de la arquitectura simplificada
+Una de las lecciones principales fue que un mopdelo más complejo no siempre garantiza mejores resultados. Los modelos con demasiados parámetros pueden tender a sobreajustarse. Nuestra **LSTM Simple** demostró ser la más robusta, logrando un **Hit Ratio del 53.18%**, lo que confirma que en ocasiones, un diseño ligero es más eficaz.
 
-### 8.1. Eficacia de la Arquitectura Híbrida
-Se ha demostrado que la integración de fuentes de datos heterogéneas es crítica para la robustez del modelo. Mientras que los retornos logarítmicos capturan la dinámica técnica y la volatilidad propia del activo, la inclusión del **Tipo de Interés de la FED** actuó como un ancla macroeconómica. Este enfoque permitió al modelo no solo reaccionar a patrones de precios pasados, sino también ajustar su sesgo predictivo según las condiciones de liquidez del mercado global.
+### 8.2. Rendimiento y Generación de Alpha
+El análisis de las estrategias de inversión (*Only-Long* y *Long-Short*) reveló que el modelo tiene una capacidad real para identificar ineficiencias:
+* **Éxito en Diversificación:** El modelo logró batir la rentabilidad pasiva del mercado (*Buy & Hold*) en el **50.0%** de los activos analizados.
+* **Casos Destacados:** En empresas como **AMZN** o **PG**, las decisiones de la IA superaron con creces el rendimiento tradicional, demostrando que el modelo detecta cambios de tendencia que el inversor pasivo ignora.
+* **Sesgo Conservador:** En activos con crecimientos explosivos y constantes (como NVDA), el modelo tendió a ser prudente, lo que sugiere nuestro modelo suele infraestimar movimientos parabólicos en favor de la estabilidad.
 
-### 8.2. El Paradigma de la Simplicidad en Finanzas
-Una de las lecciones más valiosas del proyecto fue la superioridad de la **LSTM Simple** frente a modelos más densos. En el aprendizaje profundo convencional, aumentar los parámetros suele mejorar el rendimiento; sin embargo, en series temporales financieras (caracterizadas por una bajísima relación señal-ruido), la complejidad extra se tradujo en la memorización de ruido (*overfitting*). El modelo ligero logró capturar la "señal" subyacente, obteniendo un **Hit Ratio del 53.18%**, lo cual es un resultado estadísticamente significativo en este dominio.
+### 8.3. El impacto estratégico de los datos macroeconómicos
+Una de las mejoras más significativas en el rendimiento del modelo provino de la integración de **variables macroeconómicas**. Al alimentar la red no solo con precios históricos, sino también con el **Tipo de Interés de la FED**, el modelo adquirió una "visión de contexto" de la que carecen los modelos técnicos simples. Esta capa de información exógena permitió que la IA ajustara sus expectativas según el entorno de liquidez global, logrando una estabilidad en las predicciones que los modelos basados únicamente en el precio no pudieron alcanzar. En definitiva, la combinación de micro-datos (retornos de activos) y macro-datos (tipos de interés) fue el factor diferencial para reducir el error en periodos de incertidumbre.
 
-### 8.3. Evaluación del Rendimiento del Portafolio
-La simulación de estrategias **Only-Long** y **Long-Short** reveló que el modelo es capaz de generar *Alpha* en activos específicos. Batir al mercado en el **50% de los activos** analizados confirma que la IA puede identificar ineficiencias temporales, especialmente en valores como **AMZN** o **PG**. No obstante, el experimento también subrayó la fortaleza del *Buy & Hold* en activos con tendencias parabólicas de largo plazo (como NVDA o WMT), donde el modelo pecó de conservador.
-
-### 8.4. Robustez y Auditoría Técnica
-A través de la auditoría realizada (específicamente el caso de NVDA), se concluyó que el modelo supera con éxito los baselines de persistencia (*Naive Forecast*), pero aún enfrenta retos ante eventos de "cisne negro" o volatilidades extremas. La elección de la función de pérdida **Huber Loss** fue un acierto técnico, ya que permitió que el entrenamiento no se viera descarrilado por los valores atípicos que suelen ocurrir en los cierres de mercado.
-
-### 8.5. Impacto Académico y Profesional
-En resumen, este proyecto valida la utilidad de las redes neuronales recurrentes para la predicción multivariante de activos. Se ha logrado construir un flujo de trabajo completo: desde la ingesta de datos vía API y el tratamiento de la estacionariedad, hasta la construcción de un sistema de decisión lógica que supera los rendimientos pasivos en la mitad de la cartera diversificada del S&P 500.
+### 8.4. Integración de un Pipeline de Datos Completo
+Más allá de la arquitectura de la red, los resultados del proyecto vienen por la construcción de un flujo de trabajo integral donde se lleva a cabo:
+1.  **Extracción de datos:** Implementación de técnicas de recolección de datos automatizada de **Wikipedia** (para la selección de activos) y **Yahoo Finance**, asegurando un histórico sólido de los últimos 10 años.
+2.  **Contexto Macroeconómico:** Integración de variables externas (tipos de interés de la FED) para dotar al modelo de una visión global del entorno económico.
+3.  **Transformación de Señal:** Uso de retornos logarítmicos para garantizar la estabilidad estadística de los datos de entrada.
+4.  **Lógica de Decisión:** Traducción de predicciones numéricas en una estrategia de portafolio capaz de competir con los estándares del sector.
 
 ---
 **Autores:** Mario López Guasp y Andrés Carvajal Chicaiza  
-**Fecha:** 31 de Marzo de 2026
+**Fecha:** 13 de febrero de 2026
