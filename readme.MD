@@ -147,17 +147,6 @@ El modelo se utilizó para simular dos estrategias de inversión comparadas con 
 > **Nota:** La columna **Modelo_Gana** indica si alguna de las estrategias basadas en el modelo superó el rendimiento pasivo de *Buy & Hold*.
 
 
-
-### 7.2. Auditoría de Predicción: El Caso de NVDA
-Para entender las limitaciones del modelo, se realizó una auditoría técnica sobre activos de alta volatilidad como **NVDA**. Los resultados revelan la naturaleza del desafío:
-
-
-| Métrica | Estado | Conclusión Técnica |
-| :--- | :---: | :--- |
-| **Naive Forecast** | ✅ | El modelo supera la persistencia básica, aportando valor real sobre la simple repetición del dato anterior. |
-| **Correlación** | ⚠️ | La correlación obtenida (0.0259) frente al objetivo (0.5) confirma la dificultad de predecir la magnitud exacta en activos con ruido extremo. |
-| **Media Móvil (5d)** | ❌ | El error del modelo es ligeramente superior al promedio móvil de 5 días, sugiriendo que en activos de crecimiento explosivo, las señales de tendencia simples son competidores fuertes. |
-
 ### 7.3. Comportamiento por Activo
 El éxito del modelo no fue uniforme, lo que valida la necesidad de una gestión de cartera diversificada:
 * **Éxitos Claros:** En activos como **ETN, NEE, V, AMZN, PGR y PG**, las predicciones del modelo superaron sistemáticamente al Buy & Hold.
