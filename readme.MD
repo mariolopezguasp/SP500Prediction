@@ -10,7 +10,7 @@ Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje 
 | Lineal | 145 | 53.19% | 49.96% | 51.95% |
 | XGBoost | 600 | 60.68% | 51.55% | 51.02% |
 | MLP | 3308 | 52.92% | 54.14% | 52.14% |
-| **LSTM Simple** | **13,836** | **54.54%** | **53.74%** | **53.18%** |
+| _`LSTM Simple`_ | _`13,836`_ | _`54.54%`_ | _`53.74%`_ | _`53.18%`_ |
 | LSTM Complejo | 138,214 | 53.10% | 52.15% | 52.24% |
 
 Tabla del error (RMSE)
