@@ -4,7 +4,7 @@ Este repositorio contiene el proyecto final para la asignatura de **Aprendizaje 
 
 ### Tablas de Resultados
 
-
+Tabla del % de acierto direccional
 | Modelo | Parametros | Hit Ratio Train | Hit Ratio Val | Hit Ratio Test |
 | :--- | :--- | :--- | :--- | :--- |
 | Lineal | 145 | 53.19% | 49.96% | 51.95% |
@@ -18,8 +18,8 @@ Tabla del error (RMSE)
 | :--- | :--- | :--- | :--- |
 | Lineal | 0.018751 | 0.016362 | 0.017820 |
 | XGBoost | 0.016187 | 0.016519 | 0.018227 |
-| MLP | 0.018896  | 0.017558  | 0.019979  |
-| LSTM Simple | 0.018986 | 0.016485 | 0.017598 |
+| MLP | 0.018896 | 0.017558 | 0.019979 |
+| _`LSTM Simple`_ | _`0.018986`_ | _`0.016485`_ | _`0.017598`_ |
 | LSTM Complejo | 0.019058 | 0.016488 | 0.017556 |
 
 ---
