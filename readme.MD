@@ -146,7 +146,32 @@ Para maximizar la estabilidad, se emplearon las siguientes técnicas:
 * **Huber Loss:** Utilizada como función de pérdida por ser menos sensible a valores atípicos (outliers) que el MSE tradicional.
 * **Optimización Dinámica:** Implementación de `ReduceLROnPlateau` para ajustar el *learning rate* cuando la pérdida se estanca y `EarlyStopping` para evitar el sobreentrenamiento.
 
-## 7. Conclusiones
+## 7. Análisis de Rendimiento en Test y Estrategias de Inversión
+
+Una vez seleccionado el modelo **LSTM Simple**, se evaluó su capacidad de generar retornos reales en el conjunto de datos de test (fuera de la muestra). El análisis se divide en la capacidad predictiva estadística y su ejecución en un entorno de portafolio.
+
+### 7.1. Evaluación de Estrategias (Long-Short vs. Only-Long)
+El modelo se utilizó para simular dos estrategias de inversión comparadas con el *benchmark* pasivo (Buy & Hold):
+
+* **Estrategia Only-Long:** El modelo solo abre posiciones compradoras cuando predice retornos positivos. Logró una rentabilidad media del **29.33%**, acercándose significativamente al mercado.
+* **Estrategia Long-Short:** Permite tomar posiciones cortas en activos con predicción negativa. Aunque la rentabilidad media fue del **28.22%**, demostró una capacidad excepcional en activos específicos como **XOM**, donde la estrategia capturó movimientos que el mercado ignoró.
+* **Alpha Generado:** El modelo batió al mercado en el **50.0%** de los activos, destacando casos como **AMZN** (+27.46% sobre B&H) y **PG**, donde la IA transformó una pérdida del mercado (-6.19%) en una ganancia significativa.
+
+### 7.2. Auditoría de Predicción: El Caso de NVDA
+Para entender las limitaciones del modelo, se realizó una auditoría técnica sobre activos de alta volatilidad como **NVDA**. Los resultados revelan la naturaleza del desafío:
+
+| Métrica | Estado | Conclusión Técnica |
+| :--- | :---: | :--- |
+| **Naive Forecast** | ✅ | El modelo supera la persistencia básica, aportando valor real sobre la simple repetición del dato anterior. |
+| **Correlación** | ⚠️ | La correlación obtenida (0.0259) frente al objetivo (0.5) confirma la dificultad de predecir la magnitud exacta en activos con ruido extremo. |
+| **Media Móvil (5d)** | ❌ | El error del modelo es ligeramente superior al promedio móvil de 5 días, sugiriendo que en activos de crecimiento explosivo, las señales de tendencia simples son competidores fuertes. |
+
+### 7.3. Comportamiento por Activo
+El éxito del modelo no fue uniforme, lo que valida la necesidad de una gestión de cartera diversificada:
+* **Éxitos Claros:** En activos como **ETN, NEE, V, AMZN, PGR y PG**, las estrategias basadas en IA superaron sistemáticamente al Buy & Hold.
+* **Desafíos:** En activos con tendencias alcistas parabólicas (como **WMT** o **NVDA**), el modelo tendió a ser conservador, lo que resultó en un *underperformance* relativo frente a simplemente mantener el activo.
+
+## 8. Conclusiones
 * **Viabilidad del Deep Learning:** Los resultados confirman que es posible batir estrategias básicas como el *Naive Forecast*, aunque los márgenes en series financieras son extremadamente estrechos.
 * **La Simplicidad es Clave:** En mercados financieros, "más parámetros" no equivale a "mejor rendimiento". La arquitectura ligera generalizó mejor que los modelos densos al ignorar parte del ruido inherente a los precios.
 * **Impacto de Datos Exógenos:** La inclusión del tipo de interés de la FED ayudó a estabilizar las predicciones, sugiriendo que los modelos puramente técnicos se benefician enormemente de variables fundamentales.
