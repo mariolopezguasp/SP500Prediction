@@ -11,7 +11,7 @@ Tabla del % de acierto direccional
 | Lineal | 145 | 53.19% | 49.96% | 51.95% |
 | XGBoost | 600 | 60.68% | 51.55% | 51.02% |
 | MLP | 3308 | 52.92% | 54.14% | 52.14% |
-| LSTM Simple | 13,836 | 54.69% | 53.38% | 52.72% |
+| LSTM Simple | 13,836 | 54.54% | 53.74% | 53.18% |
 | LSTM Complejo | 138,214 | 53.10% | 52.15% | 52.24% |
 
 Tabla del error (RMSE)
@@ -20,40 +20,37 @@ Tabla del error (RMSE)
 | Lineal | 0.018751 | 0.016362 | 0.017820 |
 | XGBoost | 0.016187 | 0.016519 | 0.018227 |
 | MLP | 0.018896  | 0.017558  | 0.019979  |
-| LSTM Simple | 0.018976 | 0.016485 | 0.017598 |
+| LSTM Simple | 0.018986 | 0.016485 | 0.017598 |
 | LSTM Complejo | 0.019058 | 0.016488 | 0.017556 |
 
 ## 📊 Resultados y Análisis del Portafolio
 
-### 📈 Estadísticas Globales
 | Métrica | Valor |
 | :--- | :--- |
-| **Rentabilidad Media Mercado (B&H)** | 31.27% |
-| **Rentabilidad Media Modelo (Long-Short)** | 29.87% |
-| **Rentabilidad Media Modelo (Only-Long)** | 29.46% |
-| **Mejor Activo (Modelo)** | **XOM** (114.78%) |
-| **Peor Activo (Modelo)** | **ETN** (-10.84%) |
-| **Activos que superan al Mercado** | 41.7% |
+| **Media Rentabilidad Mercado (B&H)** | 31.27% |
+| **Media Rentabilidad Modelo (Long-Short)** | 28.22% |
+| **Media Rentabilidad Modelo (Only-Long)** | 29.33% |
+| **Mejor Activo (Modelo)** | **WMT** (57.11%) |
+| **Peor Activo (Modelo)** | **XOM** (-11.97%) |
+| **Porcentaje de activos batidos** | **50.0%** |
 
 ---
 
-### 📉 Rendimiento Detallado por Activo
-Comparativa de rentabilidad según la estrategia aplicada:
+### 📈 Desglose por Activo
 
-| Activo | B&H (%) | Only-Long (%) | Long-Short (%) | ¿IA Supera Mercado? |
+| Activo | B&H (%) | Only-Long (%) | Long-Short (%) | ¿IA Gana? |
 | :--- | :---: | :---: | :---: | :---: |
-| **JPM** | 49.40 | 59.13 | **69.49** | ✅ SÍ |
-| **ETN** | 13.37 | 0.54 | -10.84 | ❌ NO |
-| **NVDA** | 70.82 | 68.24 | 65.70 | ❌ NO |
-| **NEE** | 13.92 | 25.08 | **37.33** | ✅ SÍ |
-| **V** | 24.89 | 27.68 | **30.52** | ✅ SÍ |
-| **AMZN** | 29.53 | 21.81 | 14.55 | ❌ NO |
-| **MSFT** | 14.01 | 10.54 | 7.17 | ❌ NO |
-| **PGR** | 4.89 | -0.84 | -6.26 | ❌ NO |
-| **XOM** | 21.48 | 61.53 | **114.78** | ✅ SÍ |
-| **WELL** | 68.04 | 47.45 | 29.39 | ❌ NO |
-| **PG** | -6.19 | -4.92 | **-3.64** | ✅ SÍ |
-| **WMT** | 71.04 | 37.33 | 10.26 | ❌ NO |
+| **JPM** | 49.40 | 39.49 | 30.24 | ❌ NO |
+| **ETN** | 13.37 | 19.15 | **25.23** | ✅ SÍ |
+| **NVDA** | 70.82 | 53.58 | 38.09 | ❌ NO |
+| **NEE** | 13.92 | 22.64 | **32.02** | ✅ SÍ |
+| **V** | 24.89 | 27.18 | **29.51** | ✅ SÍ |
+| **AMZN** | 29.53 | 42.60 | **56.99** | ✅ SÍ |
+| **MSFT** | 14.01 | 8.69 | 3.61 | ❌ NO |
+| **PGR** | 4.89 | 4.90 | **4.90** | ✅ SÍ |
+| **XOM** | 21.48 | 3.41 | -11.97 | ❌ NO |
+| **WELL** | 68.04 | 60.03 | 52.41 | ❌ NO |
+| **PG** | -6.19 | 6.30 | **
 
 > **Nota:** La columna **IA_Gana** indica si alguna de las estrategias basadas en el modelo superó el rendimiento pasivo de *Buy & Hold*.
 
