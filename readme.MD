@@ -23,47 +23,6 @@ Tabla del error (RMSE)
 | LSTM Simple | 0.018986 | 0.016485 | 0.017598 |
 | LSTM Complejo | 0.019058 | 0.016488 | 0.017556 |
 
-## 📊 Resultados y Análisis del Portafolio
-
-| Métrica | Valor |
-| :--- | :--- |
-| **Media Rentabilidad Mercado (B&H)** | 31.27% |
-| **Media Rentabilidad Modelo (Long-Short)** | 28.22% |
-| **Media Rentabilidad Modelo (Only-Long)** | 29.33% |
-| **Mejor Activo (Modelo)** | **WMT** (57.11%) |
-| **Peor Activo (Modelo)** | **XOM** (-11.97%) |
-| **Porcentaje de activos batidos** | **50.0%** |
-
----
-
-### 📈 Desglose por Activo
-
-| Activo | B&H (%) | Only-Long (%) | Long-Short (%) | ¿IA Gana? |
-| :--- | :---: | :---: | :---: | :---: |
-| **JPM** | 49.40 | 39.49 | 30.24 | ❌ NO |
-| **ETN** | 13.37 | 19.15 | **25.23** | ✅ SÍ |
-| **NVDA** | 70.82 | 53.58 | 38.09 | ❌ NO |
-| **NEE** | 13.92 | 22.64 | **32.02** | ✅ SÍ |
-| **V** | 24.89 | 27.18 | **29.51** | ✅ SÍ |
-| **AMZN** | 29.53 | 42.60 | **56.99** | ✅ SÍ |
-| **MSFT** | 14.01 | 8.69 | 3.61 | ❌ NO |
-| **PGR** | 4.89 | 4.90 | **4.90** | ✅ SÍ |
-| **XOM** | 21.48 | 3.41 | -11.97 | ❌ NO |
-| **WELL** | 68.04 | 60.03 | 52.41 | ❌ NO |
-| **PG** | -6.19 | 6.30 | **
-
-> **Nota:** La columna **IA_Gana** indica si alguna de las estrategias basadas en el modelo superó el rendimiento pasivo de *Buy & Hold*.
-
-### 🔍 Auditoría de Modelo: NVDA
-
-Resumen de validación de métricas frente a objetivos establecidos:
-
-| # | Métrica | Valor Obtenido | Objetivo | Resultado |
-| :--- | :--- | :---: | :---: | :---: |
-| 0 | **Naive Forecast** | 0.000920 | < 0.002027 | ✅ |
-| 1 | **Correlación** | 0.0259 | > 0.5000 | ⚠️ |
-| 2 | **Media Móvil (5d)** | 0.000920 | < 0.000780 | ❌ |
-
 ---
 
 ## 1. Definición del Problema
@@ -157,8 +116,39 @@ El modelo se utilizó para simular dos estrategias de inversión comparadas con 
 * **Estrategia Long-Short:** Permite tomar posiciones cortas en activos con predicción negativa. Aunque la rentabilidad media fue del **28.22%**, demostró una capacidad excepcional en activos específicos como **XOM**, donde la estrategia capturó movimientos que el mercado ignoró.
 * **Alpha Generado:** El modelo batió al mercado en el **50.0%** de los activos, destacando casos como **AMZN** (+27.46% sobre B&H) y **PG**, donde la IA transformó una pérdida del mercado (-6.19%) en una ganancia significativa.
 
+| Métrica | Valor |
+| :--- | :--- |
+| **Media Rentabilidad Mercado (B&H)** | 31.27% |
+| **Media Rentabilidad Modelo (Long-Short)** | 28.22% |
+| **Media Rentabilidad Modelo (Only-Long)** | 29.33% |
+| **Mejor Activo (Modelo)** | **WMT** (57.11%) |
+| **Peor Activo (Modelo)** | **XOM** (-11.97%) |
+| **Porcentaje de activos batidos** | **50.0%** |
+
+---
+
+
+| Activo | B&H (%) | Only-Long (%) | Long-Short (%) | ¿Modelo Gana? |
+| :--- | :---: | :---: | :---: | :---: |
+| **JPM** | 49.40 | 39.49 | 30.24 | ❌ NO |
+| **ETN** | 13.37 | 19.15 | **25.23** | ✅ SÍ |
+| **NVDA** | 70.82 | 53.58 | 38.09 | ❌ NO |
+| **NEE** | 13.92 | 22.64 | **32.02** | ✅ SÍ |
+| **V** | 24.89 | 27.18 | **29.51** | ✅ SÍ |
+| **AMZN** | 29.53 | 42.60 | **56.99** | ✅ SÍ |
+| **MSFT** | 14.01 | 8.69 | 3.61 | ❌ NO |
+| **PGR** | 4.89 | 4.90 | **4.90** | ✅ SÍ |
+| **XOM** | 21.48 | 3.41 | -11.97 | ❌ NO |
+| **WELL** | 68.04 | 60.03 | 52.41 | ❌ NO |
+| **PG** | -6.19 | 6.30 | **
+
+> **Nota:** La columna **Modelo_Gana** indica si alguna de las estrategias basadas en el modelo superó el rendimiento pasivo de *Buy & Hold*.
+
+
+
 ### 7.2. Auditoría de Predicción: El Caso de NVDA
 Para entender las limitaciones del modelo, se realizó una auditoría técnica sobre activos de alta volatilidad como **NVDA**. Los resultados revelan la naturaleza del desafío:
+
 
 | Métrica | Estado | Conclusión Técnica |
 | :--- | :---: | :--- |
@@ -168,15 +158,28 @@ Para entender las limitaciones del modelo, se realizó una auditoría técnica s
 
 ### 7.3. Comportamiento por Activo
 El éxito del modelo no fue uniforme, lo que valida la necesidad de una gestión de cartera diversificada:
-* **Éxitos Claros:** En activos como **ETN, NEE, V, AMZN, PGR y PG**, las estrategias basadas en IA superaron sistemáticamente al Buy & Hold.
+* **Éxitos Claros:** En activos como **ETN, NEE, V, AMZN, PGR y PG**, las predicciones del modelo superaron sistemáticamente al Buy & Hold.
 * **Desafíos:** En activos con tendencias alcistas parabólicas (como **WMT** o **NVDA**), el modelo tendió a ser conservador, lo que resultó en un *underperformance* relativo frente a simplemente mantener el activo.
 
-## 8. Conclusiones
-* **Viabilidad del Deep Learning:** Los resultados confirman que es posible batir estrategias básicas como el *Naive Forecast*, aunque los márgenes en series financieras son extremadamente estrechos.
-* **La Simplicidad es Clave:** En mercados financieros, "más parámetros" no equivale a "mejor rendimiento". La arquitectura ligera generalizó mejor que los modelos densos al ignorar parte del ruido inherente a los precios.
-* **Impacto de Datos Exógenos:** La inclusión del tipo de interés de la FED ayudó a estabilizar las predicciones, sugiriendo que los modelos puramente técnicos se benefician enormemente de variables fundamentales.
-* **Rendimiento del Portafolio:** El modelo logró batir la estrategia *Buy & Hold* en el **50.0%** de los activos analizados, destacando casos de éxito como **AMZN** (56.99% vs 29.53%) y **PG**.
+## 8. Conclusiones y Discusión Final
+
+El desarrollo de este proyecto ha permitido explorar la intersección entre las arquitecturas de **Deep Learning** y la microestructura de los mercados financieros. Tras un proceso iterativo de diseño, entrenamiento y validación, se extraen las siguientes conclusiones fundamentales:
+
+### 8.1. Eficacia de la Arquitectura Híbrida
+Se ha demostrado que la integración de fuentes de datos heterogéneas es crítica para la robustez del modelo. Mientras que los retornos logarítmicos capturan la dinámica técnica y la volatilidad propia del activo, la inclusión del **Tipo de Interés de la FED** actuó como un ancla macroeconómica. Este enfoque permitió al modelo no solo reaccionar a patrones de precios pasados, sino también ajustar su sesgo predictivo según las condiciones de liquidez del mercado global.
+
+### 8.2. El Paradigma de la Simplicidad en Finanzas
+Una de las lecciones más valiosas del proyecto fue la superioridad de la **LSTM Simple** frente a modelos más densos. En el aprendizaje profundo convencional, aumentar los parámetros suele mejorar el rendimiento; sin embargo, en series temporales financieras (caracterizadas por una bajísima relación señal-ruido), la complejidad extra se tradujo en la memorización de ruido (*overfitting*). El modelo ligero logró capturar la "señal" subyacente, obteniendo un **Hit Ratio del 53.18%**, lo cual es un resultado estadísticamente significativo en este dominio.
+
+### 8.3. Evaluación del Rendimiento del Portafolio
+La simulación de estrategias **Only-Long** y **Long-Short** reveló que el modelo es capaz de generar *Alpha* en activos específicos. Batir al mercado en el **50% de los activos** analizados confirma que la IA puede identificar ineficiencias temporales, especialmente en valores como **AMZN** o **PG**. No obstante, el experimento también subrayó la fortaleza del *Buy & Hold* en activos con tendencias parabólicas de largo plazo (como NVDA o WMT), donde el modelo pecó de conservador.
+
+### 8.4. Robustez y Auditoría Técnica
+A través de la auditoría realizada (específicamente el caso de NVDA), se concluyó que el modelo supera con éxito los baselines de persistencia (*Naive Forecast*), pero aún enfrenta retos ante eventos de "cisne negro" o volatilidades extremas. La elección de la función de pérdida **Huber Loss** fue un acierto técnico, ya que permitió que el entrenamiento no se viera descarrilado por los valores atípicos que suelen ocurrir en los cierres de mercado.
+
+### 8.5. Impacto Académico y Profesional
+En resumen, este proyecto valida la utilidad de las redes neuronales recurrentes para la predicción multivariante de activos. Se ha logrado construir un flujo de trabajo completo: desde la ingesta de datos vía API y el tratamiento de la estacionariedad, hasta la construcción de un sistema de decisión lógica que supera los rendimientos pasivos en la mitad de la cartera diversificada del S&P 500.
 
 ---
 **Autores:** Mario López Guasp y Andrés Carvajal Chicaiza  
-**Fecha:** 13 de febrero de 2026
+**Fecha:** 31 de Marzo de 2026
