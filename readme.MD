@@ -155,7 +155,7 @@ El éxito del modelo no fue uniforme, lo que valida la necesidad de una gestión
 ## 8. Conclusiones
 
 ### 8.1. Superioridad de la Arquitectura Simplificada
-[cite_start]Una de las lecciones fundamentales de este proyecto es que una mayor complejidad paramétrica no garantiza un rendimiento superior en mercados financieros[cite: 62]. [cite_start]Los modelos con exceso de parámetros, como la **LSTM Compleja**, tendieron al sobreajuste (*overfitting*) al memorizar el ruido estocástico del entrenamiento[cite: 34, 62]. [cite_start]Nuestra **LSTM Simple** demostró ser la más robusta, logrando un **Hit Ratio del 53.18%**, lo que confirma que en entornos de baja señal, un diseño ligero es más eficaz para la generalización[cite: 26, 28, 62].
+Una de las lecciones fundamentales de este proyecto es que una mayor complejidad paramétrica no garantiza un rendimiento superior en mercados financieros[cite: 62]. [cite_start]Los modelos con exceso de parámetros, como la **LSTM Compleja**, tendieron al sobreajuste (*overfitting*) al memorizar el ruido estocástico del entrenamiento[cite: 34, 62]. [cite_start]Nuestra **LSTM Simple** demostró ser la más robusta, logrando un **Hit Ratio del 53.18%**, lo que confirma que en entornos de baja señal, un diseño ligero es más eficaz para la generalización[cite: 26, 28, 62].
 
 ### 8.2. Rendimiento Operativo y Estrategias de Inversión
 [cite_start]El análisis de las estrategias (**Only-Long** y **Long-Short**) reveló una capacidad real del modelo para identificar ineficiencias estructurales en el mercado[cite: 47, 64]. 
@@ -171,7 +171,8 @@ El éxito del modelo no fue uniforme, lo que valida la necesidad de una gestión
 * **Transformación de Señal**: Uso de retornos logarítmicos y escalado estándar para garantizar la estacionariedad y estabilidad estadística de las entradas.
 * **Lógica de Decisión**: Traducción exitosa de predicciones numéricas tensoriales en estrategias de portafolio capaces de competir con los estándares del sector financiero.
 
-[cite_start]Este pipeline representa una base sólida y escalable para futuras implementaciones con otras fuentes exógenas que puedan aportar información adicional a la red para optimizar los resultados predictivos[cite: 65].
+Este pipeline representa una base sólida y escalable para futuras implementaciones con otras fuentes exógenas que puedan aportar información adicional a la red para optimizar los resultados predictivos[cite: 65].
+
 ---
 **Autores:** Mario López Guasp y Andrés Carvajal Chicaiza  
 **Fecha:** 13 de febrero de 2026
